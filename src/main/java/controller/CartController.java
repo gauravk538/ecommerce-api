@@ -4,6 +4,7 @@ import com.gaurav.ecommerce.model.CartItem;
 import com.gaurav.ecommerce.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class CartController {
 
     // POST - Item cart mein daalo
     @PostMapping
-    public CartItem addToCart(@RequestBody CartItem cartItem) {
+    public CartItem addToCart(@Valid @RequestBody CartItem cartItem) {
         return cartService.addToCart(cartItem);
     }
 

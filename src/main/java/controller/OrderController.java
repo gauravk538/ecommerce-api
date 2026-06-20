@@ -4,6 +4,7 @@ import com.gaurav.ecommerce.model.Order;
 import com.gaurav.ecommerce.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class OrderController {
 
     // POST - Order place karo
     @PostMapping
-    public Order placeOrder(@RequestBody Order order) {
+    public Order placeOrder(@Valid @RequestBody Order order) {
         return orderService.placeOrder(order);
     }
 
