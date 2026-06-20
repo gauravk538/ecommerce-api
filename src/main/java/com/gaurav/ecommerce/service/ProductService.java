@@ -4,6 +4,7 @@ import com.gaurav.ecommerce.model.Product;
 import com.gaurav.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.gaurav.ecommerce.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,8 +21,10 @@ public class ProductService {
     }
 
     // Get product by ID
-    public Optional<Product> getProductById(Long id) {
-        return productRepository.findById(id);
+    public Product getProductById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Product not found with id: " + id));
     }
 
     // Add new product

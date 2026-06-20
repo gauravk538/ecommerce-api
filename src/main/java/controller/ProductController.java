@@ -29,7 +29,7 @@ public class ProductController {
     // GET product by ID
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id) {
-        return productService.getProductById(id).orElse(null);
+        return productService.getProductById(id);
     }
 
     // DELETE product
