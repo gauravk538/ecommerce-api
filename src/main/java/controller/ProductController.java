@@ -1,7 +1,7 @@
 package com.gaurav.ecommerce.controller;
 
 import com.gaurav.ecommerce.model.Product;
-import com.gaurav.ecommerce.repository.ProductRepository;
+import com.gaurav.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,30 +12,36 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     // GET all products
     @GetMapping
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        return productService.getAllProducts();
     }
 
     // POST add new product
     @PostMapping
     public Product addProduct(@RequestBody Product product) {
-        return productRepository.save(product);
+        return productService.addProduct(product);
     }
 
     // GET product by ID
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id) {
-        return productRepository.findById(id).orElse(null);
+        return productService.getProductById(id).orElse(null);
     }
 
     // DELETE product
     @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable Long id) {
-        productRepository.deleteById(id);
+        productService.deleteProduct(id);
         return "Product deleted successfully";
+    }
+
+    // PUT update product
+    @PutMapping("/{id}")
+    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
+        return productService.updateProduct(id, product);
     }
 }
